@@ -12,7 +12,7 @@ export default async function handler(
         const rs = await fetch("https://westeurope.tts.speech.microsoft.com/cognitiveservices/v1", {
             method: "POST",
             headers: {
-                'Ocp-Apim-Subscription-Key': '20684852041844e797a3d35e49ce1226',
+                'Ocp-Apim-Subscription-Key': `${process.env.NEXT_PUBLIC_KEY}`,
                 'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
                 'Content-Type': 'application/ssml+xml'
             },
