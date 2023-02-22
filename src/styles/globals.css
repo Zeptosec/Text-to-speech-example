@@ -40,6 +40,31 @@
   --card-border-rgb: 131, 134, 135;
 }
 
+audio {
+  display: none;
+}
+
+main {
+  display: grid;
+  justify-content: center;
+}
+
+form {
+  display: grid;
+  max-width: 500px;
+  padding: 10px;
+  justify-content: center;
+  gap: 10px
+  
+}
+
+button {
+  font-size: larger;
+  width: 100px;
+  margin: auto;
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
