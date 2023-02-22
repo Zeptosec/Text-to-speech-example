@@ -34,7 +34,7 @@ export default function Home() {
       const href = URL.createObjectURL(blob);
       setAsrc(href);
     } catch (err: any) {
-      console.log(err);
+      console.log(err)
     } finally {
       setTimeout(() => setCanUse(true), 3000);
     }
