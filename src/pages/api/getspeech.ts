@@ -5,8 +5,9 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<any>
 ) {
-    const { text } = req.body
+    const { text, voice } = req.body
     if (!text) return res.status(400).json({ error: "Text is missing!" });
+    if (!voice) return res.status(400).json({ error: "Voice is missing!" });
     console.log(text);
     try {
         const rs = await fetch("https://westeurope.tts.speech.microsoft.com/cognitiveservices/v1", {
@@ -16,7 +17,14 @@ export default async function handler(
                 'X-Microsoft-OutputFormat': 'audio-16khz-32kbitrate-mono-mp3',
                 'Content-Type': 'application/ssml+xml'
             },
-            body: `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="en-US-AriaNeural"><prosody rate="0%" pitch="0%">${text}</prosody></voice></speak>`
+            body: `<speak 
+            xmlns="http://www.w3.org/2001/10/synthesis" 
+            xmlns:mstts="http://www.w3.org/2001/mstts" 
+            xmlns:emo="http://www.w3.org/2009/10/emotionml" 
+            version="1.0" 
+            xml:lang="en-US">
+            <voice name="${voice}">
+            <prosody rate="0%" pitch="0%">${text}</prosody></voice></speak>`
         })
         const blob = await rs.blob();
         const buff = await blob.arrayBuffer();
